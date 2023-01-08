@@ -1,4 +1,5 @@
 package com.portfolio.GabyDs.Security.Entity;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,15 +7,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class UsuarioPrincipal implements UserDetails{
+public class UsuarioPrincipal implements UserDetails {
+
     private String nombre;
     private String nombreUsuario;
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    
-    //constructor
 
+    //constructor
     public UsuarioPrincipal(String nombre, String nombreUsuario, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
@@ -22,13 +23,13 @@ public class UsuarioPrincipal implements UserDetails{
         this.password = password;
         this.authorities = authorities;
     }
-    
-    public static UsuarioPrincipal build(Usuario usuario){
+
+    public static UsuarioPrincipal build(Usuario usuario) {
         List<GrantedAuthority> authorities;
         authorities = usuario.getRoles().stream()
                 .map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name())).collect(Collectors
-                        .toList());
-        
+                .toList());
+
         return new UsuarioPrincipal(usuario.getNombre(), usuario.getNombreUsuario(), usuario.getEmail(), usuario.getPassword(), authorities);
     }
 
@@ -39,18 +40,18 @@ public class UsuarioPrincipal implements UserDetails{
 
     @Override
     public String getPassword() {
-        return password;    
+        return password;
     }
 
     @Override
     public String getUsername() {
         return nombreUsuario;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
-    
+
     public String getEmail() {
         return email;
     }
@@ -74,6 +75,5 @@ public class UsuarioPrincipal implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-    
-    
+
 }
