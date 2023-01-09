@@ -9,7 +9,7 @@ import com.portfolio.GabyDs.Security.Enums.RolNombre;
 import com.portfolio.GabyDs.Security.Service.RolService;
 import com.portfolio.GabyDs.Security.Service.UsuarioService;
 import com.portfolio.GabyDs.Security.jwt.JwtProvider;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;

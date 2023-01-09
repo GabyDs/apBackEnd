@@ -3,8 +3,8 @@ package com.portfolio.GabyDs.Security.Service;
 import com.portfolio.GabyDs.Security.Entity.Rol;
 import com.portfolio.GabyDs.Security.Enums.RolNombre;
 import com.portfolio.GabyDs.Security.Repository.RolRepository;
-import jakarta.transaction.Transactional;
 import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,7 @@ package com.portfolio.GabyDs.Security.Service;
 
 import com.portfolio.GabyDs.Security.Entity.Usuario;
 import com.portfolio.GabyDs.Security.Repository.iUsuarioRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
