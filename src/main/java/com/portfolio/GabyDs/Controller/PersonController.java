@@ -1,7 +1,6 @@
 package com.portfolio.GabyDs.Controller;
 
-import com.portfolio.GabyDs.Entity.Persona;
-import com.portfolio.GabyDs.Interface.IPersonaService;
+import com.portfolio.GabyDs.Entity.Person;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,54 +13,55 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.portfolio.GabyDs.Interface.IPersonService;
 
 @RestController
 // error CORS policy
 @CrossOrigin(origins = "http://localhost:4200")
-public class PersonaController {
-    @Autowired IPersonaService ipersonaService;
+public class PersonController {
+    @Autowired IPersonService ipersonService;
     
     // ROL USUARIO
     @GetMapping("personas/traer")
-    public List<Persona> getPersona(){
-        return ipersonaService.getPersona();
+    public List<Person> getPerson(){
+        return ipersonService.getPerson();
     }
     
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/personas/crear")
-    public String createPersona(@RequestBody Persona persona){
-        ipersonaService.savePersona(persona);
+    public String createPerson(@RequestBody Person person){
+        ipersonService.savePerson(person);
         return "La persona fue creada correctamente";
     }
     
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/personas/borrar/{id}")
-    public String deletePersona(@PathVariable Long id){
-        ipersonaService.deletePersona(id);
+    public String deletePerson(@PathVariable Long id){
+        ipersonService.deletePerson(id);
         return "La persona fue eliminada correctamente";
     }
     
     // URL:PORT/personas/editar/id/nombre/apellido/img
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/personas/editar/{id}")
-    public Persona editPersona(@PathVariable Long id,
-                                @RequestParam("nombre") String nuevoNombre,
-                                @RequestParam("apellido") String nuevoApellido,
-                                @RequestParam("img") String nuevoImg){
-        Persona persona = ipersonaService.findPersona(id);
+    public Person editPerson(@PathVariable Long id,
+                                @RequestParam("name") String newName,
+                                @RequestParam("lastname") String newLastName,
+                                @RequestParam("img") String newImg){
+        Person person = ipersonService.findPerson(id);
         
-        persona.setNombre(nuevoNombre);
-        persona.setApellido(nuevoApellido);
-        persona.setImg(nuevoImg);
+        person.setName(newName);
+        person.setLastName(newLastName);
+        person.setImg(newImg);
         
-        ipersonaService.savePersona(persona);
+        ipersonService.savePerson(person);
         
-        return persona;
+        return person;
     }
     
     @GetMapping("/personas/traer/perfil")
-    public Persona findPersona(){
-        return ipersonaService.findPersona((long)1);
+    public Person findPerson(){
+        return ipersonService.findPerson((long)1);
     }
     
 }

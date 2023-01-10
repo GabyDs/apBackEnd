@@ -1,13 +1,13 @@
 package com.portfolio.GabyDs.Security.Controller;
 
 import com.portfolio.GabyDs.Security.Dto.JwtDto;
-import com.portfolio.GabyDs.Security.Dto.LoginUsuario;
-import com.portfolio.GabyDs.Security.Dto.NuevoUsuario;
+import com.portfolio.GabyDs.Security.Dto.UserLogin;
+import com.portfolio.GabyDs.Security.Dto.NewUser;
 import com.portfolio.GabyDs.Security.Entity.Rol;
-import com.portfolio.GabyDs.Security.Entity.Usuario;
-import com.portfolio.GabyDs.Security.Enums.RolNombre;
+import com.portfolio.GabyDs.Security.Entity.User;
+import com.portfolio.GabyDs.Security.Enums.RolName;
 import com.portfolio.GabyDs.Security.Service.RolService;
-import com.portfolio.GabyDs.Security.Service.UsuarioService;
+import com.portfolio.GabyDs.Security.Service.UserService;
 import com.portfolio.GabyDs.Security.jwt.JwtProvider;
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -40,7 +40,7 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UsuarioService usuarioService;
+    UserService userService;
 
     @Autowired
     RolService rolService;
@@ -48,44 +48,44 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
     
-    @PostMapping("/nuevo")
-    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
+    @PostMapping("/new")
+    public ResponseEntity<?> nuevo(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity(new Mensaje("Campos mal puestos o email invalido"), HttpStatus.BAD_REQUEST);
         }
 
-        if (usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario())) {
+        if (userService.existsByUserName(newUser.getUserName())) {
             return new ResponseEntity(new Mensaje("Ese nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
         }
 
-        if (usuarioService.existsByEmail(nuevoUsuario.getEmail())) {
+        if (userService.existsByEmail(newUser.getEmail())) {
             return new ResponseEntity(new Mensaje("Ese email ya existe"), HttpStatus.BAD_REQUEST);
         }
 
-        Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
-                nuevoUsuario.getEmail(), passwordEnconder.encode(nuevoUsuario.getPassword()));
+        User user = new User(newUser.getName(), newUser.getUserName(),
+                newUser.getEmail(), passwordEnconder.encode(newUser.getPassword()));
 
         Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
+        roles.add(rolService.getByRolName(RolName.ROLE_USER).get());
 
-        if (nuevoUsuario.getRoles().contains("admin")) {
-            roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
+        if (newUser.getRoles().contains("admin")) {
+            roles.add(rolService.getByRolName(RolName.ROLE_ADMIN).get());
         }
 
-        usuario.setRoles(roles);
-        usuarioService.save(usuario);
+        user.setRoles(roles);
+        userService.save(user);
 
         return new ResponseEntity(new Mensaje("Usuario guardado"), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
+    public ResponseEntity<JwtDto> login(@Valid @RequestBody UserLogin userLogin, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity(new Mensaje("Campos mal puestos"), HttpStatus.BAD_REQUEST);
         }
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginUsuario.getNombreUsuario(), loginUsuario.getPassword()
+                userLogin.getUserName(), userLogin.getPassword()
         ));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

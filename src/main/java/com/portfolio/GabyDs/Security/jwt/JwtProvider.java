@@ -1,6 +1,6 @@
 package com.portfolio.GabyDs.Security.jwt;
 
-import com.portfolio.GabyDs.Security.Entity.UsuarioPrincipal;
+import com.portfolio.GabyDs.Security.Entity.PrincipalUser;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -25,7 +25,7 @@ public class JwtProvider {
     private int expiration;
     
     public String generateToken(Authentication authentication){
-        UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
+        PrincipalUser usuarioPrincipal = (PrincipalUser) authentication.getPrincipal();
         return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration*1000))
@@ -33,7 +33,7 @@ public class JwtProvider {
                 .compact();
     }
     
-    public String getNombreUsuarioFromToken(String token){
+    public String getUserNameFromToken(String token){
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
     }
     

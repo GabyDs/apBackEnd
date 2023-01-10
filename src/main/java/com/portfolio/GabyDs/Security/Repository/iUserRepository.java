@@ -1,16 +1,16 @@
 package com.portfolio.GabyDs.Security.Repository;
 
-import com.portfolio.GabyDs.Security.Entity.Usuario;
+import com.portfolio.GabyDs.Security.Entity.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface iUsuarioRepository extends JpaRepository<Usuario, Integer>{
+public interface iUserRepository extends JpaRepository<User, Integer>{
     
-    Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+    Optional<User> findByUserName(String userName);
     
-    boolean existsByNombreUsuario(String nombreUsuario);
+    boolean existsByUserName(String userName);
     boolean existsByEmail(String email);
     
 }

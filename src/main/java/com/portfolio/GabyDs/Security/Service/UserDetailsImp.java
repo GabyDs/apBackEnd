@@ -1,7 +1,7 @@
 package com.portfolio.GabyDs.Security.Service;
 
-import com.portfolio.GabyDs.Security.Entity.Usuario;
-import com.portfolio.GabyDs.Security.Entity.UsuarioPrincipal;
+import com.portfolio.GabyDs.Security.Entity.User;
+import com.portfolio.GabyDs.Security.Entity.PrincipalUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsImp implements UserDetailsService{
     @Autowired
-    UsuarioService usuarioService;
+    UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
-        Usuario usuario = usuarioService.getByNombreUsuario(nombreUsuario).get();
-        return UsuarioPrincipal.build(usuario);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        User user = userService.getByUserName(userName).get();
+        return PrincipalUser.build(user);
     }
     
 }

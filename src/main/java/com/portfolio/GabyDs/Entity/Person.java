@@ -11,18 +11,18 @@ import lombok.Setter;
 
 @Getter @Setter
 @Entity
-public class Persona {
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @NotNull
     @Size(min = 1, max = 50, message = "No cumple con la longitud")
-    private String nombre;
+    private String name;
     
     @NotNull
     @Size(min = 1, max = 50, message = "No cumple con la longitud")
-    private String apellido;
+    private String lastName;
 
     @Size(min = 1, max = 50, message = "No cumple con la longitud")
     private String img;

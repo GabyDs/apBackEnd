@@ -4,29 +4,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class NuevoUsuario {
-    private String nombre;
-    private String nombreUsuario;
+public class NewUser {
+    private String name;
+    private String userName;
     private String email;
     private String password;
     private Set<String> roles = new HashSet<>();
     
     // getter and setter
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {

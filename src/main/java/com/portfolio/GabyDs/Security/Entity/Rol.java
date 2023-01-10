@@ -1,6 +1,6 @@
 package com.portfolio.GabyDs.Security.Entity;
 
-import com.portfolio.GabyDs.Security.Enums.RolNombre;
+import com.portfolio.GabyDs.Security.Enums.RolName;
 import com.sun.istack.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,15 +18,15 @@ public class Rol {
     
     @NotNull
     @Enumerated(EnumType.STRING)
-    private RolNombre rolNombre;
+    private RolName rolName;
 
     // constructor
 
     public Rol() {
     }
 
-    public Rol(RolNombre rolNombre) {
-        this.rolNombre = rolNombre;
+    public Rol(RolName rolName) {
+        this.rolName = rolName;
     }
     
     // Getters Setters
@@ -39,12 +39,12 @@ public class Rol {
         this.id = id;
     }
 
-    public RolNombre getRolNombre() {
-        return rolNombre;
+    public RolName getRolNombre() {
+        return rolName;
     }
 
-    public void setRolNombre(RolNombre rolNombre) {
-        this.rolNombre = rolNombre;
+    public void setRolNombre(RolName rolName) {
+        this.rolName = rolName;
     }
     
     
