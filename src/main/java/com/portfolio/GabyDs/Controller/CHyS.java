@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 // error CORS policy
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfoliogabyds.web.app")
 @RequestMapping("/hys")
 public class CHyS {
     @Autowired
