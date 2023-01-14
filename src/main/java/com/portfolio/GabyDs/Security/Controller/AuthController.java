@@ -30,7 +30,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+@CrossOrigin(origins = "https://portfoliogabyds01.web.app/")
 public class AuthController {
 
     @Autowired
