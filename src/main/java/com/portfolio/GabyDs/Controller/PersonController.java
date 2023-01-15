@@ -17,7 +17,7 @@ import com.portfolio.GabyDs.Interface.IPersonService;
 
 @RestController
 // error CORS policy
-@CrossOrigin(origins = "https://portfoliogabyds01.web.app")
+@CrossOrigin(origins = {"https://portfoliogabyds01.web.app", "http://localhost:4200"})
 public class PersonController {
     @Autowired IPersonService ipersonService;
     
