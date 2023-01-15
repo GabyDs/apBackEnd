@@ -22,7 +22,7 @@ public class PersonController {
     @Autowired IPersonService ipersonService;
     
     // ROL USUARIO
-    @GetMapping("personas/traer")
+    @GetMapping("/personas/traer")
     public List<Person> getPerson(){
         return ipersonService.getPerson();
     }
