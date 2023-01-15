@@ -24,6 +24,7 @@ public class Person {
     @NotNull
     private String description;
     
+    @Size(min = 1, max = 255, message = "No cumple con la longitud")
     private String img;
 
     public Person() {

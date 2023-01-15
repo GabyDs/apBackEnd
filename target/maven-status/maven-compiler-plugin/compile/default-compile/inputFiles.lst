@@ -5,6 +5,7 @@
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Service/ImpPersonService.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Security/MainSecurity.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Security/Controller/Mensaje.java
+/home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Repository/RPerson.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Repository/RHyS.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Dto/dtoPerson.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Dto/dtoHyS.java
@@ -14,7 +15,6 @@
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Controller/CExperience.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Controller/CEducation.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Repository/REducation.java
-/home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Repository/IPersonRepository.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Security/Service/RolService.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Entity/Experience.java
 /home/gabriel/Documentos/Programacion/portfolio/apBackEnd/src/main/java/com/portfolio/GabyDs/Security/Repository/iUserRepository.java

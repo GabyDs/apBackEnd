@@ -3,16 +3,16 @@ package com.portfolio.GabyDs.Service;
 import com.portfolio.GabyDs.Entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.portfolio.GabyDs.Repository.IPersonRepository;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
+import com.portfolio.GabyDs.Repository.RPerson;
 
 @Service
 @Transactional
 public class ImpPersonService {
 
-    @Autowired IPersonRepository ipersonRepository;
+    @Autowired RPerson ipersonRepository;
     
     // create list with all experiences
     public List<Person> list(){

@@ -9,9 +9,9 @@ com/portfolio/GabyDs/Security/Controller/AuthController.class
 com/portfolio/GabyDs/Security/Service/UserService.class
 com/portfolio/GabyDs/Security/Entity/Rol.class
 com/portfolio/GabyDs/Security/Controller/Mensaje.class
+com/portfolio/GabyDs/Repository/RPerson.class
 com/portfolio/GabyDs/Controller/CHyS.class
 com/portfolio/GabyDs/Security/Entity/User.class
-com/portfolio/GabyDs/Repository/IPersonRepository.class
 com/portfolio/GabyDs/GabyDsApplication.class
 com/portfolio/GabyDs/Dto/dtoEducation.class
 com/portfolio/GabyDs/Repository/RHyS.class
