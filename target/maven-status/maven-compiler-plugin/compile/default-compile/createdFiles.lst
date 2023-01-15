@@ -17,9 +17,9 @@ com/portfolio/GabyDs/Dto/dtoEducation.class
 com/portfolio/GabyDs/Repository/RHyS.class
 com/portfolio/GabyDs/Security/Service/RolService.class
 com/portfolio/GabyDs/Security/Dto/UserLogin.class
+com/portfolio/GabyDs/Dto/dtoPerson.class
 com/portfolio/GabyDs/Service/SEducation.class
 com/portfolio/GabyDs/Security/Service/UserDetailsImp.class
-com/portfolio/GabyDs/Interface/IPersonService.class
 com/portfolio/GabyDs/Repository/REducation.class
 com/portfolio/GabyDs/Security/jwt/JwtProvider.class
 com/portfolio/GabyDs/Dto/dtoExperience.class

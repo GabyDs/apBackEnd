@@ -1,67 +1,72 @@
 package com.portfolio.GabyDs.Controller;
 
+import com.portfolio.GabyDs.Dto.dtoPerson;
 import com.portfolio.GabyDs.Entity.Person;
+import com.portfolio.GabyDs.Security.Controller.Mensaje;
+import com.portfolio.GabyDs.Service.ImpPersonService;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.portfolio.GabyDs.Interface.IPersonService;
 
 @RestController
 // error CORS policy
+@RequestMapping("/person")
 @CrossOrigin(origins = {"https://portfoliogabyds01.web.app", "http://localhost:4200"})
 public class PersonController {
-    @Autowired IPersonService ipersonService;
+    @Autowired 
+    ImpPersonService personService;
     
-    // ROL USUARIO
-    @GetMapping("/personas/traer")
-    public List<Person> getPerson(){
-        return ipersonService.getPerson();
+   @GetMapping("/list")
+    public ResponseEntity<List<Person>> list(){
+        List<Person> list = personService.list();
+        return new ResponseEntity(list, HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/personas/crear")
-    public String createPerson(@RequestBody Person person){
-        ipersonService.savePerson(person);
-        return "La persona fue creada correctamente";
-    }
-    
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/personas/borrar/{id}")
-    public String deletePerson(@PathVariable Long id){
-        ipersonService.deletePerson(id);
-        return "La persona fue eliminada correctamente";
-    }
-    
-    // URL:PORT/personas/editar/id/nombre/apellido/img
-    @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/personas/editar/{id}")
-    public Person editPerson(@PathVariable Long id,
-                                @RequestParam("name") String newName,
-                                @RequestParam("lastname") String newLastName,
-                                @RequestParam("img") String newImg){
-        Person person = ipersonService.findPerson(id);
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Person> getById(@PathVariable("id") int id){
+        if(!personService.existsById(id)){
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        }
         
-        person.setName(newName);
-        person.setLastName(newLastName);
-        person.setImg(newImg);
-        
-        ipersonService.savePerson(person);
-        
-        return person;
+        Person person = personService.getOne(id).get();
+        return new ResponseEntity(person, HttpStatus.OK);
     }
     
-    @GetMapping("/personas/traer/perfil")
-    public Person findPerson(){
-        return ipersonService.findPerson((long)1);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPerson dtoper){
+        // valida si existe el id
+        if(!personService.existsById(id)){
+            return new ResponseEntity(new Mensaje("El id no existe"), HttpStatus.BAD_REQUEST);
+        }
+        
+        // compara el nombre de la experiencia con una que ya existe
+        if(personService.existsByName(dtoper.getName()) && personService.getByName(dtoper.getName()).get().getId() != id){
+            return new ResponseEntity(new Mensaje("Esa persona ya existe"), HttpStatus.BAD_REQUEST);
+        }
+        
+        // si no agrega nombre
+        if(StringUtils.isBlank(dtoper.getName())){
+            return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+        }
+        
+        Person person = personService.getOne(id).get();
+        
+        person.setName(dtoper.getName());
+        person.setLastName(dtoper.getLastName());
+        person.setDescription(dtoper.getDescription());
+        person.setImg(dtoper.getImg());
+        
+        personService.save(person);
+        return new ResponseEntity(new Mensaje("Persona actualizada"), HttpStatus.OK);
     }
     
 }
